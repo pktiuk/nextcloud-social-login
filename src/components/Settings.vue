@@ -120,7 +120,8 @@
         <br/>
         <label>
           {{ t(appName, 'Allow login only for specified guilds') }}<br/>
-          <input type="text" :name="'providers['+name+'][guilds]'" v-model="provider.guilds"/>
+          <input type="text" :name="'providers['+name+'][guilds]'" v-model="provider.guilds"
+            placeholder="{{ t(appName, 'Guild ID-s separated by commas') }}"/>
         </label>
       </template>
     </div>
