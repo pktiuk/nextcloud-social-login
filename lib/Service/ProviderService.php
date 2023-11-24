@@ -374,7 +374,6 @@ class ProviderService
                 $this->storage->clear();
                 throw new LoginException($this->l->t('Login is available only to members of the following GitHub organizations: %s', $config['orgs']));
             };
-            $checkOrgs();
         }
 
         if ($provider === 'BitBucket') {
@@ -406,13 +405,17 @@ class ProviderService
             $checkGuilds = function () use ($allowedGuilds, $userGuilds, $config) {
                 foreach ($userGuilds as $guild) {
                     if (in_array($guild->id ?? null, $allowedGuilds)) {
-                        return;
+                        return  $guild->id;
                     }
                 }
                 $this->storage->clear();
                 throw new LoginException($this->l->t('Login is available only to members of the following Discord guilds: %s', $config['guilds']));
             };
-            $checkGuilds();
+            $matching_guild_id = $checkGuilds();
+            $guildMember = $adapter->apiRequest("guilds/$matching_guild_id/members/@me");
+            if($guildMember->nick){
+                $guildMember->display_name = $guildMember->nick;
+            }
         }
 
         if (!empty($config['logout_url'])) {
