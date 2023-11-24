@@ -123,6 +123,9 @@
           <input type="text" :name="'providers['+name+'][guilds]'" v-model="provider.guilds"
             placeholder="{{ t(appName, 'Guild ID-s separated by commas') }}"/>
         </label>
+        <br/>
+          <input type="checkbox" id="import_nick_checkbox" :name="'providers['+name+'][import_nick]'" v-model="provider.import_nick"/>
+          <label for="import_nick_checkbox"> {{ t(appName, 'Import nickname from matching guild') }}</label>
       </template>
     </div>
     <br/>

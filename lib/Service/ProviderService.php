@@ -245,6 +245,7 @@ class ProviderService
                         'orgs' => $prov['orgs'] ?? null,
                         'workspace' => $prov['workspace'] ?? null,
                         'guilds' => $prov['guilds'] ?? null,
+                        'import_nick' => $prov['import_nick'] ?? null,
                     ], $this->applyConfigMapping('default', $prov));
 
                     if (isset($scopes[$name])) {
